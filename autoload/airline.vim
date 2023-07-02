@@ -191,12 +191,13 @@ function! airline#update_statusline_inactive(range)
             \ 'left_sep': g:airline_left_alt_sep,
             \ 'right_sep': g:airline_right_alt_sep }, 'keep')
     endif
-    try
-      call s:invoke_funcrefs(context, g:airline_inactive_funcrefs)
-    catch /^Vim\%((\a\+)\)\=:E48:/
-      " Catch: Sandbox mode
-      " no-op
-    endtry
+    " NOTE: workaround for inactive status line clutter
+    " try
+    "   call s:invoke_funcrefs(context, g:airline_inactive_funcrefs)
+    " catch /^Vim\%((\a\+)\)\=:E48:/
+    "   " Catch: Sandbox mode
+    "   " no-op
+    " endtry
   endfor
 endfunction
 
