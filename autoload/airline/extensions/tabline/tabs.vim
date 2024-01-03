@@ -73,7 +73,7 @@ function! airline#extensions#tabline#tabs#get()
       let val .= airline#extensions#tabline#tabs#tabnr_formatter(a:i, tabpagebuflist(a:i))
     endif
 
-    return val.'%'.a:i.'T %{airline#extensions#tabline#title('.a:i.')} %)'
+    return '%'.a:i.'T %{airline#extensions#tabline#title('.a:i.')}' .val. ' %)'
   endfunction
 
   call b.insert_titles(curtab, 1, tabpagenr('$'))

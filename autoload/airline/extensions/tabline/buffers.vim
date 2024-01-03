@@ -120,7 +120,7 @@ function! airline#extensions#tabline#buffers#get()
 
     if get(g:, 'airline#extensions#tabline#buffer_idx_mode', 0)
       if len(s:number_map) > 0
-        return space. s:get_number(a:i) . '%(%{airline#extensions#tabline#get_buffer_name('.bufnum.')}%)' . s:spc
+        return space . '%(%{airline#extensions#tabline#get_buffer_name('.bufnum.')}%)' . s:get_number(a:i) . s:spc
       else
         return '['.(a:i+1).s:spc.'%(%{airline#extensions#tabline#get_buffer_name('.bufnum.')}%)'.']'
       endif
