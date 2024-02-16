@@ -86,7 +86,7 @@ if !exists(":def") || !airline#util#has_vim9_script()
     let colors    = get(a:palette, 'tabline', {})
     let tablabel  = get(colors, 'airline_tablabel', a:palette.normal.airline_b)
     " Theme for tabs on the left
-    let tab     = get(colors, 'airline_tab', a:palette.inactive.airline_c)
+    let tab     = get(colors, 'airline_tab', a:palette.normal.airline_c)
     let tabsel  = get(colors, 'airline_tabsel', a:palette.normal.airline_a)
     let tabtype = get(colors, 'airline_tabtype', a:palette.visual.airline_a)
     let tabfill = get(colors, 'airline_tabfill', a:palette.normal.airline_c)
@@ -113,7 +113,7 @@ if !exists(":def") || !airline#util#has_vim9_script()
     " label on the right
     let tablabel_r  = get(colors, 'airline_tablabel', a:palette.normal.airline_b)
     let tabsel_right  = get(colors, 'airline_tabsel_right', a:palette.normal.airline_a)
-    let tab_right     = get(colors, 'airline_tab_right',    a:palette.inactive.airline_c)
+    let tab_right     = get(colors, 'airline_tab_right',    a:palette.normal.airline_c)
     let tabmod_right  = get(colors, 'airline_tabmod_right', a:palette.insert.airline_a)
     let tabhid_right  = get(colors, 'airline_tabhid_right', a:palette.normal.airline_c)
     call airline#highlighter#exec('airline_tablabel_right', tablabel_r)
@@ -254,6 +254,12 @@ if !exists(":def") || !airline#util#has_vim9_script()
 
   function! airline#extensions#tabline#group_of_bufnr(tab_bufs, bufnr)
     let cur = bufnr('%')
+
+    " NOTE: hack for main buffer
+    if index(a:tab_bufs, a:bufnr) == 2
+      return 'airline_tabsel'
+    endif
+
     if cur == a:bufnr
       if g:airline_detect_modified && getbufvar(a:bufnr, '&modified')
         let group = 'airline_tabmod'
