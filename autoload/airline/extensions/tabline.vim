@@ -256,7 +256,7 @@ if !exists(":def") || !airline#util#has_vim9_script()
     let cur = bufnr('%')
 
     " NOTE: hack for main buffer
-    if index(a:tab_bufs, a:bufnr) == 2
+    if index(a:tab_bufs, a:bufnr) == 2 && getbufvar(cur, '&buftype') == 'nofile'
       return 'airline_tabsel'
     endif
 
